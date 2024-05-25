@@ -3,12 +3,30 @@
  */
 package org.example;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.example.command.CommandExecutionPlan;
+import org.example.command.CommandExecutor;
+import org.example.command.CommandInterpretor;
+
+import java.io.File;
+
 public class App {
+
+    public static final Logger log = LogManager.getLogger(App.class.getName());
+
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        log.info(new App().getGreeting());
+        //log.info(CommandExecutor.runCommandAndReturnOutput("ls -la"));
+        //log.info(CommandExecutor.runCommandWithUserConfirmation("ls -la", "Do you want to get the files listed "));
+        CommandInterpretor ci = new CommandInterpretor();
+        File testFile = new File(Thread.currentThread().getContextClassLoader()
+                .getResource("execution_plan1.json").getFile());
+        CommandExecutionPlan cip = ci.getCommandExecutionPlan(testFile);
+        ci.executePlan(cip);
     }
 }

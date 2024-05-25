@@ -1,0 +1,17 @@
+{
+  "orderedListOfCommands": [
+    {
+      "commandString": "ls -laht",
+      "needsConfirmation": true,
+      "order": 1,
+      "question": "Do you want to know the file listings ",
+      "isPending": true
+    },
+    {
+      "commandString": "ls -la",
+      "needsConfirmation": false,
+      "order": 2,
+      "isPending": true
+    }
+  ]
+}
