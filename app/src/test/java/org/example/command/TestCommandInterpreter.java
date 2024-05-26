@@ -5,11 +5,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
-public class TestCommandInterpretor extends TestCase {
+public class TestCommandInterpreter extends TestCase {
 
-    public static final Logger log = LogManager.getLogger(TestCommandInterpretor.class.getName());
+    public static final Logger log = LogManager.getLogger(TestCommandInterpreter.class.getName());
 
     public void testObjectToJson(){
         Command command = new Command("ls -laht", true, 1);
@@ -28,21 +27,21 @@ public class TestCommandInterpretor extends TestCase {
 
         log.info(jsonedObject);
 
-        CommandInterpretor commandInterpretor = new CommandInterpretor();
-        CommandExecutionPlan commandExecutionPlan1 = commandInterpretor.getCommandExecutionPlan(jsonedObject);
+        CommandInterpreter commandInterpreter = new CommandInterpreter();
+        CommandExecutionPlan commandExecutionPlan1 = commandInterpreter.getCommandExecutionPlan(jsonedObject);
         assertEquals(commandExecutionPlan1.getOrderedListOfCommands().get(0).commandString, "ls -laht");
 
     }
 
     public void testExecutePlan(){
-        CommandInterpretor ci = new CommandInterpretor();
+        CommandInterpreter ci = new CommandInterpreter();
         File testFile = new File(Thread.currentThread().getContextClassLoader()
                 .getResource("execution_plan1.json").getFile());
         CommandExecutionPlan cip = ci.getCommandExecutionPlan(testFile);
         assertEquals(cip.getOrderedListOfCommands().get(1).commandString, "ls -la");
     }
 
-    private class TestCommandInterpreterMock extends CommandInterpretor {
+    private class TestCommandInterpreterMock extends CommandInterpreter {
         public void setCommandExecutionPlan(CommandExecutionPlan commandExecutionPlanInput){
             commandExectionPlan = commandExecutionPlanInput;
         }

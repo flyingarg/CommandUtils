@@ -11,9 +11,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CommandInterpretor {
+public class CommandInterpreter {
 
-    public static final Logger log = LogManager.getLogger(CommandInterpretor.class.getName());
+    public static final Logger log = LogManager.getLogger(CommandInterpreter.class.getName());
     protected CommandExecutionPlan commandExectionPlan = new CommandExecutionPlan();
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -46,7 +46,7 @@ public class CommandInterpretor {
     }
 
     private String getFileContents(File file){
-        String line = "";
+        String line;
         StringBuilder jsonStringBuilder = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
